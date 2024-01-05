@@ -1,2 +1,2 @@
 # ansible_demo
-Labmiljø for Ansible automatisering.
+Labmiljø for ansible automatisering. 
