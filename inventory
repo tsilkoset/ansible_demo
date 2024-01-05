@@ -1,0 +1,8 @@
+#ts-node1,2
+[UpdateRing1]
+192.168.250.6
+192.168.250.7
+
+#ts-node3
+[UpdateRing2]
+192.168.250.8
