@@ -1,8 +1,7 @@
-#ts-node1,2
-[UpdateRing1]
-192.168.250.6
-192.168.250.7
+[Ubuntu]
+192.168.250.6 nano_pkg=nano ping_pkg=inetutils-ping
+192.168.250.7 nano_pkg=nano ping_pkg=inetutils-ping
+192.168.250.8 nano_pkg=nano ping_pkg=inetutils-ping
 
-#ts-node3
-[UpdateRing2]
-192.168.250.8
+[Debian]
+192.168.250.9 nano_pkg=nano ping_pkg=inetutils-ping

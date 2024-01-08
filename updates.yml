@@ -1,0 +1,22 @@
+---
+
+- hosts: Ubuntu
+  become: true
+  tasks:
+
+  - name: Funksjons -og sikkerhetsoppdateringer for ubuntu
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: Debian
+  become: true
+  become_method: su
+  tasks:
+
+    - name: Funksjons -og sikkerhetsoppdateringer for debian
+      apt:
+        upgrade: dist
+        update_chache: yes
+      when: ansible_distribution == "Ubuntu"

@@ -1,0 +1,26 @@
+---
+
+- hosts: Ubuntu
+  become: true
+  tasks:
+
+  - name: Oppdatere repos og installere default verktøy ubuntu
+    package:
+      name:
+        - "{{ nano_pkg }}"
+        - "{{ ping_pkg }}"
+      state: latest
+      update_cache: yes
+
+- hosts: Debian
+  become: yes
+  become_method: su
+  tasks:
+
+  - name: Oppdatere repos og installere default verkøy debian
+    package:
+      name:
+        - "{{ nano_pkg }}"
+        - "{{ ping_pkg }}"
+      state: latest
+      update_cache: yes
