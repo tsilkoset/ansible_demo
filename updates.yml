@@ -2,6 +2,8 @@
 
 - hosts: Ubuntu
   become: true
+  gather_facts: yes
+
   tasks:
 
   - name: Funksjons -og sikkerhetsoppdateringer for ubuntu
@@ -10,9 +12,25 @@
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
+  - name: Check if a reboot is required.
+    ansible.builtin.stat:
+        path: /var/run/reboot-required
+        get_checksum: no
+    register: reboot_required_file
+
+  - name: Reboot the server (if required).
+    ansible.builtin.reboot:
+    when: reboot_required_file.stat.exists == true
+
+  - name: Remove dependencies that are no longer required.
+    ansible.builtin.apt:
+      autoremove: yes
+
 - hosts: Debian
   become: true
   become_method: su
+  gather_facts: yes
+
   tasks:
 
     - name: Funksjons -og sikkerhetsoppdateringer for debian
@@ -20,3 +38,17 @@
         upgrade: dist
         update_chache: yes
       when: ansible_distribution == "Ubuntu"
+ 
+    - name: Check if a reboot is required.
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+        get_checksum: no
+      register: reboot_required_file
+
+    - name: Reboot the server (if required).
+      ansible.builtin.reboot:
+      when: reboot_required_file.stat.exists == true
+
+    - name: Remove dependencies that are no longer required.
+      ansible.builtin.apt:
+        autoremove: yes

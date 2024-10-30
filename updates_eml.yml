@@ -1,0 +1,11 @@
+- name: Sending an e-mail using Gmail SMTP servers
+  mail:
+    host: smtp.office365.com
+    port: 587
+    secure: starttls
+    username: ansible@eltele.serit.no
+    password: mysecret
+    to: John Smith <john.smith@example.com>
+    subject: Ansible-report
+    body: System {{ ansible_hostname }} require reboot.
+  delegate_to: localhost
